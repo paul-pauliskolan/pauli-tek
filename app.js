@@ -78,7 +78,7 @@ const isChapterPage = () => Boolean(document.body.dataset.chapter);
 const chapterPath = c => isChapterPage() ? `chapter-${c.nr}.html` : `chapters/chapter-${c.nr}.html`;
 const presentationPath = c => isChapterPage() ? `../presentation.html?chapter=${c.id}` : `presentation.html?chapter=${c.id}`;
 const orderedChapters = () => [...chapters].sort((a, b) => Number(a.nr) - Number(b.nr));
-function renderNavigation() { el('#chapter-nav').innerHTML = orderedChapters().map(c => `<a href="${chapterPath(c)}">${c.nr}. ${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>`).join(''); }
+function renderNavigation() { el('#chapter-nav').innerHTML = `${orderedChapters().map(c => `<a href="${chapterPath(c)}">${c.nr}. ${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>`).join('')}<span class="nav-label nav-label-support">Stöd</span><a href="${isChapterPage() ? '../ai-stod.html' : 'ai-stod.html'}">AI-stöd · Paubel</a>`; }
 function renderChapters() { el('#chapter-grid').innerHTML = orderedChapters().map(c => `<article class="chapter-card"><span class="chapter-number">Kapitel ${c.nr}</span><h3>${c.title}</h3><p>${c.desc}</p><a class="button" href="${chapterPath(c)}">Öppna kapitel</a></article>`).join(''); }
 function showChapter(id) {
   const c = chapters.find(chapter => chapter.id === id); if (!c) return;
