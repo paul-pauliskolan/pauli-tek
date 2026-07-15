@@ -10,7 +10,13 @@ const chapters = [
 ];
 
 const digitaltChapter = chapters.find(chapter => chapter.id === 'digitalt');
-digitaltChapter.nr = '08';
+digitaltChapter.nr = '02';
+chapters.find(chapter => chapter.id === 'matte-tal').nr = '03';
+chapters.find(chapter => chapter.id === 'matte-algebra').nr = '04';
+chapters.find(chapter => chapter.id === 'matte-grafer').nr = '05';
+chapters.find(chapter => chapter.id === 'fysik').nr = '06';
+chapters.find(chapter => chapter.id === 'kemi').nr = '07';
+chapters.find(chapter => chapter.id === 'svenska').nr = '08';
 digitaltChapter.desc = 'Praktiska arbetssätt för macOS, Finder, Google Drive, filer, mappar och kortkommandon.';
 digitaltChapter.goals = ['skapa och använda en tydlig mappstruktur på Mac och i Google Drive','namnge, hitta, flytta och dela filer på ett genomtänkt sätt','förstå skillnaden mellan Min enhet, Delas med mig och delade mappar','välja rätt delningsbehörighet i Google Drive','använda vanliga macOS-kortkommandon för att arbeta snabbare och säkrare','skydda sitt skolarbete genom ordning, versioner och ansvarsfull delning'];
 digitaltChapter.sourceNote = `<p><strong>Varför detta kapitel?</strong> Digital ordning minskar stress, sparar tid och gör det lättare att visa sin arbetsprocess. Google rekommenderar bland annat meningsfulla filnamn, mappar och undermappar samt genvägar till material som delas med dig. <a href="https://support.google.com/drive/answer/2375091?co=GENIE.Platform%3DDesktop&hl=sv" target="_blank" rel="noopener">Googles guide: Ordna dina filer på Drive</a>.</p><p>macOS-kortkommandon kan spara många små klick. Apple påpekar att kortkommandon kan skilja sig mellan appar och tangentbordslayouter – kontrollera därför alltid appens menyer om ett kommando inte fungerar. <a href="https://support.apple.com/sv-se/102650" target="_blank" rel="noopener">Apples kortkommandon på Mac</a>.</p>`;
@@ -34,8 +40,9 @@ function escapeHTML(value) { return value.replace(/[&<>'"]/g, c => ({'&':'&amp;'
 const isChapterPage = () => Boolean(document.body.dataset.chapter);
 const chapterPath = c => isChapterPage() ? `chapter-${c.nr}.html` : `chapters/chapter-${c.nr}.html`;
 const presentationPath = c => isChapterPage() ? `../presentation.html?chapter=${c.id}` : `presentation.html?chapter=${c.id}`;
-function renderNavigation() { el('#chapter-nav').innerHTML = chapters.map(c => `<a href="${chapterPath(c)}">${c.nr}. ${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>`).join(''); }
-function renderChapters() { el('#chapter-grid').innerHTML = chapters.map(c => `<article class="chapter-card"><span class="chapter-number">Kapitel ${c.nr}</span><h3>${c.title}</h3><p>${c.desc}</p><a class="button" href="${chapterPath(c)}">Öppna kapitel</a></article>`).join(''); }
+const orderedChapters = () => [...chapters].sort((a, b) => Number(a.nr) - Number(b.nr));
+function renderNavigation() { el('#chapter-nav').innerHTML = orderedChapters().map(c => `<a href="${chapterPath(c)}">${c.nr}. ${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>`).join(''); }
+function renderChapters() { el('#chapter-grid').innerHTML = orderedChapters().map(c => `<article class="chapter-card"><span class="chapter-number">Kapitel ${c.nr}</span><h3>${c.title}</h3><p>${c.desc}</p><a class="button" href="${chapterPath(c)}">Öppna kapitel</a></article>`).join(''); }
 function showChapter(id) {
   const c = chapters.find(chapter => chapter.id === id); if (!c) return;
   el('#lesson-content').innerHTML = `<div class="lesson-header"><div><p class="eyebrow">Kapitel ${c.nr}</p><h2>${c.title}</h2><p>${c.desc}</p></div><a class="button" href="${presentationPath(c)}">Öppna presentation</a></div><div class="lesson-grid"><div><article class="lesson-block"><h3>Efter kapitlet kan du</h3><ul>${c.goals.map(goal => `<li>${goal}</li>`).join('')}</ul></article>${c.sections.map(([heading, body]) => `<article class="lesson-block"><h3>${heading}</h3><div class="lesson-text">${body}</div></article>`).join('')}<article class="lesson-block"><h3>Genomarbetat exempel</h3><p class="worked-example"><strong>Exempel:</strong> ${c.example}</p></article><article class="lesson-block reflection"><h3>Metakognition: stanna upp</h3><p><strong>Före:</strong> Vad kan jag redan? <strong>Under:</strong> Vilket steg är svårt? <strong>Efter:</strong> Vad behöver jag repetera om två dagar?</p></article></div><aside class="lesson-block"><h3>Kapitelquiz</h3><form class="quiz" data-quiz="${c.id}">${c.quiz.map(([q,answers],i) => `<div class="quiz-question"><p>${i+1}. ${q}</p>${answers.map((answer,j) => `<label class="options"><span><input type="radio" name="q${i}" value="${j}"> ${answer}</span></label>`).join('')}</div>`).join('')}<button class="button primary" type="submit">Rätta quizet</button></form><div id="quiz-result" aria-live="polite"></div><p class="presentation-link"><a href="${presentationPath(c)}">Presentation: ${c.title}</a></p></aside></div>`;
