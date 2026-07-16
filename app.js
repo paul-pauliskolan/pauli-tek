@@ -11,6 +11,7 @@ const chapters = [
 
 const digitaltChapter = chapters.find(chapter => chapter.id === 'digitalt');
 digitaltChapter.nr = '02';
+chapters.find(chapter => chapter.id === 'studieteknik').desc = 'Lär dig använda The Science of Learning i alla ämnen, i din vardag och för alltid.';
 chapters.find(chapter => chapter.id === 'matte-tal').nr = '03';
 chapters.find(chapter => chapter.id === 'matte-algebra').nr = '04';
 chapters.find(chapter => chapter.id === 'matte-grafer').nr = '05';
