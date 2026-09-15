@@ -17,37 +17,16 @@
     <div class="layout">
       <aside class="sidebar" id="sidebar">
         <p class="brand-kicker">Pauliskolan i Malmö</p>
-        <a class="brand" href="#start">Förkunskaper<br>för teknik</a>
+        <a class="brand" href="#kapitel">Förkunskaper<br>för teknik</a>
         <nav class="nav" aria-label="Kursnavigering">
-          <a class="active" href="#start">Start</a>
+          <a class="active" href="#kapitel">Start</a>
           <span class="nav-label">Kapitel</span>
           <div id="chapter-nav"></div>
         </nav>
-        <div class="sidebar-note">
-          <strong>Bygg en stabil grund</strong>
-          <p>Repetition gör dina kunskaper snabbare, säkrare och lättare att använda när uppgifterna blir svårare.</p>
-        </div>
       </aside>
 
       <main id="content">
-        <section class="hero" id="start">
-          <p class="eyebrow">Årskurs 1 · Teknikprogrammet</p>
-          <h1>Bygg en stabil grund<br>innan tempot ökar.</h1>
-          <p class="lead">Repetera viktiga förkunskaper inför teknikprogrammet. Kursen är till för träning – inte bedömning.</p>
-          <div class="note">
-            <strong>Så använder du kursen:</strong> Välj ett kapitel, arbeta i små steg och avsluta med quiz och reflektion. Återvänd sedan till området efter några dagar.
-          </div>
-        </section>
-
         <section id="kapitel">
-          <div class="section-heading">
-            <div>
-              <p class="eyebrow">Kursinnehåll</p>
-              <h2>Kapitel</h2>
-            </div>
-            <span class="tag">Välj din startpunkt</span>
-          </div>
-          <p>Alla kapitel har mål, korta genomgångar, tekniknära övningar, quiz och reflektion.</p>
           <div class="chapter-grid" id="chapter-grid"></div>
         </section>
 
@@ -63,19 +42,6 @@
           </div>
         </section>
 
-        <section id="min-plan">
-          <p class="eyebrow">Planera din träning</p>
-          <h2>Min studieplan</h2>
-          <p>Spara en enkel plan för veckan. En kort, realistisk plan är bättre än en perfekt plan som aldrig används.</p>
-          <form id="plan-form" class="plan-form">
-            <label>Jag tränar på <input required name="focus" placeholder="Till exempel: bråk och procent"></label>
-            <label>När? <input required name="when" placeholder="Till exempel: tisdag och torsdag, 20 min"></label>
-            <label>Jag märker att jag kan när <input required name="evidence" placeholder="Till exempel: jag kan lösa tre uppgifter utan stöd"></label>
-            <label>Om jag fastnar ska jag <input required name="support" placeholder="Till exempel: titta på ett exempel och fråga min lärare"></label>
-            <button class="button primary" type="submit">Spara min plan</button>
-          </form>
-          <div class="result" id="plan-result" aria-live="polite"></div>
-        </section>
       </main>
     </div>
     <footer>Förkunskaper för teknikprogrammet · Första versionen</footer>
