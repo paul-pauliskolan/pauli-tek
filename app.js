@@ -112,20 +112,26 @@ svenskaChapter.sourceNote = `<p><strong>Varför arbetar vi med detta?</strong> S
 svenskaChapter.researchExtension = `<article class="lesson-block"><h3>8. Från vardagsspråk till ämnesspråk</h3><div class="lesson-text"><p>Vardagliga ord kan vara en bra start, men i naturvetenskap behöver du sedan göra innebörden mer exakt. “Energin försvinner” kan bli “energin omvandlas till värme och ljud”. “Ström går åt” kan behöva förklaras med elektrisk energi som omvandlas i en krets.</p><p>Arbeta i tre steg: <strong>vardagsord → ämnesord → förklaring med samband</strong>. Använd gärna en bild, pilmodell eller tabell samtidigt som du skriver. Då kopplas ord, modell och idé ihop.</p></div></article><article class="lesson-block"><h3>9. Samtal och naturvetenskapliga argument</h3><div class="lesson-text"><p>Att kunna ett ord räcker inte om du inte kan använda det i ett resonemang. Arbeta gärna två och två: säg först din vardagliga idé, pröva sedan ett ämnesord och bygg till sist en fullständig förklaring tillsammans.</p><p>När du argumenterar: skriv en <strong>tes</strong>, ge <strong>belägg</strong> i form av fakta eller mätvärden och förklara <strong>hur belägget stödjer tesen</strong>. Exempel: “Koppar bör användas i ledaren eftersom koppar har god elektrisk ledningsförmåga. Det minskar resistansen i kabeln.”</p></div></article><article class="lesson-block research-exercises"><h3>Fördjupade övningar: språk som verktyg</h3><div class="lesson-text"><ol><li>Skriv om “energin försvinner” till en naturvetenskapligt mer korrekt mening. Rita en pilmodell som stöd.</li><li>Arbeta två och två: förklara varför ett metallföremål kan rosta. Börja med vardagsord och förbättra sedan förklaringen med minst två ämnesord.</li><li>Skriv en tes om vilket material som passar i en elkabel. Ge ett belägg och förklara sambandet mellan belägget och tesen.</li><li>Läs instruktionen till en enkel laboration. Markera uppgiftsverb, säkerhetsord, material och vad resultatet ska visa.</li><li>Gör en kort repetitionsplan: välj två ämnesord du ska använda i en ny förklaring om två dagar.</li></ol><p><strong>Reflektera:</strong> Hjälpte bild, samtal eller begreppsbank dig mest? Vad väljer du nästa gång?</p></div></article>`;
 function escapeHTML(value) { return value.replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
 const isChapterPage = () => Boolean(document.body.dataset.chapter || document.body.dataset.subpage);
-const chapterPath = c => isChapterPage() ? `chapter-${c.nr}.html` : `chapters/chapter-${c.nr}.html`;
+const chapterFiles = {studieteknik:'studieteknik', digitalt:'digital-grundkompetens', teknik:'teknik', 'matte-tal':'matematik-tal-procent-enheter', 'matte-algebra':'matematik-algebra-formler', 'matte-grafer':'matematik-grafer-geometri', svenska:'svenska', fysik:'fysik', kemi:'kemi', naturkunskap:'naturkunskap'};
+const chapterOrder = {studieteknik:1, digitalt:2, teknik:3, 'matte-tal':4, 'matte-algebra':5, 'matte-grafer':6, svenska:7, fysik:8, kemi:9, naturkunskap:10};
+const chapterPath = c => isChapterPage() ? `${chapterFiles[c.id]}.html` : `chapters/${chapterFiles[c.id]}.html`;
 const presentationPath = c => isChapterPage() ? `../presentation.html?chapter=${c.id}` : `presentation.html?chapter=${c.id}`;
-const orderedChapters = () => [...chapters].sort((a, b) => Number(a.nr) - Number(b.nr));
+const orderedChapters = () => [...chapters].sort((a, b) => chapterOrder[a.id] - chapterOrder[b.id]);
 function renderNavigation() {
   const chromePath = isChapterPage() ? 'chrome-bokmarken.html' : 'chapters/chrome-bokmarken.html';
   const macPath = isChapterPage() ? 'macos-genvagar.html' : 'chapters/macos-genvagar.html';
   const dockPath = isChapterPage() ? 'behall-i-dock.html' : 'chapters/behall-i-dock.html';
+  const shortcutsPath = isChapterPage() ? 'snabbkommandon.html' : 'chapters/snabbkommandon.html';
   const contactPath = isChapterPage() ? 'kontakt.html' : 'chapters/kontakt.html';
-  const chapterLink = c => `<a href="${chapterPath(c)}">${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>${c.id === 'digitalt' ? `<a style="padding-left:24px" href="${chromePath}" ${document.body.dataset.subpage === 'chrome' ? 'aria-current="page"' : ''}>↳ Bokmärken i Chrome</a><a style="padding-left:24px" href="${macPath}" ${document.body.dataset.subpage === 'macos' ? 'aria-current="page"' : ''}>↳ Genvägar i Finder</a><a style="padding-left:24px" href="${dockPath}" ${document.body.dataset.subpage === 'dock' ? 'aria-current="page"' : ''}>↳ Behåll i Dock</a>` : ''}`;
+  const subpageLink = (file, label, id) => `<a style="padding-left:24px" href="${isChapterPage() ? file : 'chapters/' + file}" ${document.body.dataset.subpage === id ? 'aria-current="page"' : ''}>↳ ${label}</a>`;
+  const courseShortcuts = `<span class="nav-label" style="padding-left:24px">Åk 1</span>${subpageLink('snabbkommandon-teknik-1.html','Teknik 1','shortcuts-teknik')}${subpageLink('snabbkommandon-autodesk-fusion.html','CAD – Autodesk Fusion','shortcuts-fusion')}<span class="nav-label" style="padding-left:24px">Åk 2 och 3</span>${subpageLink('snabbkommandon-design-produktutveckling.html','Design och produktutveckling','shortcuts-design')}${subpageLink('snabbkommandon-information-medieteknik.html','Informations- och medieteknik','shortcuts-information')}${subpageLink('snabbkommandon-teknikvetenskap.html','Teknikvetenskap','shortcuts-teknikvetenskap')}${subpageLink('snabbkommandon-samhallsbyggande-miljo.html','Samhällsbyggande och miljö','shortcuts-samhallsbyggande')}<span class="nav-label" style="padding-left:24px">IT-programmet</span>${subpageLink('it-programmet.html','Kurser och snabbkommandon','it-programmet')}`;
+  const chapterLink = c => `<a href="${chapterPath(c)}">${c.title.replace(' för teknikelever','').replace(' från grundskolan','')}</a>${c.id === 'digitalt' ? `<a style="padding-left:24px" href="${chromePath}" ${document.body.dataset.subpage === 'chrome' ? 'aria-current="page"' : ''}>↳ Bokmärken i Chrome</a><a style="padding-left:24px" href="${macPath}" ${document.body.dataset.subpage === 'macos' ? 'aria-current="page"' : ''}>↳ Genvägar i Finder</a><a style="padding-left:24px" href="${dockPath}" ${document.body.dataset.subpage === 'dock' ? 'aria-current="page"' : ''}>↳ Behåll i Dock</a><a style="padding-left:24px" href="${shortcutsPath}" ${document.body.dataset.subpage === 'shortcuts' ? 'aria-current="page"' : ''}>↳ Alla snabbkommandon</a>${courseShortcuts}` : ''}`;
   const digital = chapters.find(c => c.id === 'digitalt');
-  const primary = [digital, ...orderedChapters().filter(c => Number(c.nr) < 3)];
-  const others = orderedChapters().filter(c => Number(c.nr) >= 3 && c.id !== 'digitalt');
+  const primary = [digital, ...orderedChapters().filter(c => chapterOrder[c.id] < 3 && c.id !== 'digitalt')];
+  const others = orderedChapters().filter(c => chapterOrder[c.id] >= 3 && c.id !== 'digitalt');
   const expanded = others.some(c => c.id === document.body.dataset.chapter);
   el('#chapter-nav').innerHTML = primary.map(chapterLink).join('') + `<details class="other-chapters-nav" ${expanded ? 'open' : ''}><summary>Övrigt</summary><div>${others.map(chapterLink).join('')}</div></details><span class="nav-label nav-label-support">Kontakt</span><a href="${contactPath}" ${document.body.dataset.subpage === 'kontakt' ? 'aria-current="page"' : ''}>Ändringsförslag</a>`;
+  document.querySelectorAll('a[href="chapter-02.html"]').forEach(link => { link.href = 'digital-grundkompetens.html'; });
 }
 
 function renderFooter() {
@@ -139,10 +145,10 @@ function renderFooter() {
   footer.innerHTML = 'Sidan utvecklas för Teknik och IT vid Pauliskolan i Malmö.<br>Huvudutvecklare: Paul Belfrage';
 }
 function renderChapters() {
-  const card = c => `<article class="chapter-card"><span class="chapter-number">Kapitel ${c.nr}</span><h3>${c.title}</h3><p>${c.desc}</p><a class="button" href="${chapterPath(c)}">Öppna kapitel</a></article>`;
+  const card = c => `<article class="chapter-card"><h3>${c.title}</h3><p>${c.desc}</p><a class="button" href="${chapterPath(c)}">Öppna kapitel</a></article>`;
   const digital = chapters.find(c => c.id === 'digitalt');
-  const primary = [digital, ...orderedChapters().filter(c => Number(c.nr) < 3)];
-  const others = orderedChapters().filter(c => Number(c.nr) >= 3 && c.id !== 'digitalt');
+  const primary = [digital, ...orderedChapters().filter(c => chapterOrder[c.id] < 3 && c.id !== 'digitalt')];
+  const others = orderedChapters().filter(c => chapterOrder[c.id] >= 3 && c.id !== 'digitalt');
   el('#chapter-grid').innerHTML = primary.map(card).join('') + `<details class="other-chapters-home"><summary>Övrigt</summary><div class="chapter-grid">${others.map(card).join('')}</div></details>`;
 }
 const fourthQuizOption = {
