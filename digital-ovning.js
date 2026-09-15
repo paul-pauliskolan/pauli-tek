@@ -8,7 +8,9 @@
   const addedFavorites = new Set();
   let selected = null, gesture = null, ghost = null, suppressClick = false;
   const feedback = (kind, text, state = '') => {
-    const node = $(kind + '-feedback'); node.textContent = text; node.className = 'feedback ' + state;
+    const node = $(kind + '-feedback');
+    if (!node) return;
+    node.textContent = text; node.className = 'feedback ' + state;
   };
   function clearSelection() {
     selected = null; selectedFolder = '';
@@ -34,6 +36,24 @@
     makeButton('bookmark-slot', '★ Teknik', 'bookmark');
     feedback('chrome', 'Bokmärket är skapat! Dra Teknik till mappen Skola.', 'success');
   }
+  function showBookmarkInFolder(destination) {
+    const content = $('school-content');
+    content.replaceChildren();
+    const heading = document.createElement('p');
+    heading.className = 'bookmark-folder-heading';
+    heading.textContent = 'Mappen ' + destination;
+    const link = document.createElement('button');
+    link.type = 'button';
+    link.className = 'folder-link bookmark-folder-link';
+    const title = document.createElement('strong');
+    title.textContent = '★ Teknik – kursens startsida';
+    const url = document.createElement('span');
+    url.className = 'bookmark-url';
+    url.textContent = 'https://skola.example/teknik';
+    link.append(title, url);
+    link.addEventListener('click', () => feedback('chrome', 'Den sparade adressen öppnar Teknik – kursens startsida i den här simuleringen.', 'success'));
+    content.append(heading, link);
+  }
   function renderFavorites() {
     const container = $('favorite-slot'); container.replaceChildren();
     favoriteItems.forEach((name, index) => {
@@ -51,7 +71,7 @@
       container.appendChild(row);
     });
   }
-  renderFavorites();
+  if ($('favorite-slot')) renderFavorites();
   function drop(target, keys = {}, targetNode = null) {
     const name = selectedFolder;
     const item = selected;
@@ -62,7 +82,7 @@
       const destination = targetNode?.dataset.folderName || 'Skola';
       const count = targetNode?.querySelector('.created-folder-count') || $('school-count'); count.textContent = '(1)';
       $('school-content').dataset.destination = destination;
-      makeButton('school-content', '★ Teknik – öppna sparad sida', null, () => feedback('chrome', 'Den sparade adressen öppnar Teknik – kursens startsida i den här simuleringen.', 'success'));
+      showBookmarkInFolder(destination);
       feedback('chrome', 'Klart! Bokmärket Teknik ligger nu i ' + destination + '. Klicka på det för att prova länken.', 'success');
     } else if (item === 'folder' && target === 'favorites') {
       if (addedFavorites.has(name)) feedback('finder', name + ' finns redan i Favoriter. Prova en annan mapp.', 'success');
@@ -88,6 +108,7 @@
     $('bookmark-menu-button').setAttribute('aria-expanded', 'true');
     $('context-add-folder').focus();
   }
+  if ($('chrome-sim')) {
   $('bookmark-bar').addEventListener('contextmenu', openBookmarkMenu);
   $('bookmark-bar').addEventListener('keydown', event => {
     if (event.key === 'ContextMenu' || (event.shiftKey && event.key === 'F10')) openBookmarkMenu(event);
@@ -126,6 +147,7 @@
     if (event.key === 'Tab') closeBookmarkMenu();
   });
   $('star').addEventListener('click', createBookmark);
+  }
   document.addEventListener('click', event => {
     if (suppressClick) { suppressClick = false; return; }
     const item = event.target.closest('[data-item]');
@@ -134,7 +156,8 @@
     if (target) {
       if (!selected && target.dataset.target === 'school') {
         const name = target.dataset.folderName || 'Skola';
-        feedback('chrome', $('school-content').dataset.destination === name && inSchool ? 'I ' + name + ' finns bokmärket Teknik. Klicka på länken nedanför.' : 'Mappen ' + name + ' är tom. Dra bokmärket Teknik hit.'); return;
+        if ($('school-content').dataset.destination === name && inSchool) showBookmarkInFolder(name);
+        feedback('chrome', $('school-content').dataset.destination === name && inSchool ? 'I ' + name + ' finns bokmärket Teknik med den sparade webbadressen.' : 'Mappen ' + name + ' är tom. Dra bokmärket Teknik hit.'); return;
       }
       drop(target.dataset.target, event, target);
     }
@@ -176,17 +199,53 @@
   });
   document.addEventListener('pointercancel', () => { endGesture(); clearSelection(); });
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') { endGesture(); clearSelection(); if (!$('bookmark-context').hidden) { closeBookmarkMenu(); (menuReturnFocus || $('bookmark-menu-button')).focus(); } }
+    if (event.key === 'Escape') { endGesture(); clearSelection(); if ($('bookmark-context') && !$('bookmark-context').hidden) { closeBookmarkMenu(); (menuReturnFocus || $('bookmark-menu-button')).focus(); } }
   });
-  $('reset-chrome').addEventListener('click', () => {
+  if ($('reset-chrome')) $('reset-chrome').addEventListener('click', () => {
     endGesture(); clearSelection(); bookmark = inSchool = false;
     closeBookmarkMenu(); createdFolders.clear(); $('created-folders').replaceChildren(); delete $('school-content').dataset.destination;
     $('bookmark-slot').replaceChildren(); $('school-content').replaceChildren(); $('school-count').textContent = '(0)'; $('star').textContent = '☆';
     feedback('chrome', 'Dra adressen till bokmärkesfältet eller klicka på stjärnan.');
   });
-  $('reset-finder').addEventListener('click', () => {
+  if ($('reset-finder')) $('reset-finder').addEventListener('click', () => {
     endGesture(); clearSelection();
     favoriteItems = [...initialFavorites]; addedFavorites.clear(); renderFavorites();
     feedback('finder', 'Dra en av de tre mapparna till ett mellanrum under Favoriter.');
   });
+
+  if ($('dock-sim')) {
+    let kept = false;
+    const closeDockMenus = () => {
+      $('dock-menu').hidden = true; $('dock-options-menu').hidden = true;
+      $('dock-app').setAttribute('aria-expanded', 'false'); $('dock-options').setAttribute('aria-expanded', 'false');
+    };
+    const openDockMenu = event => {
+      event.preventDefault(); closeDockMenus(); $('dock-menu').hidden = false;
+      $('dock-app').setAttribute('aria-expanded', 'true'); feedback('dock', 'Välj Alternativ.');
+      $('dock-options').focus();
+    };
+    $('dock-app').addEventListener('contextmenu', openDockMenu);
+    $('dock-app').addEventListener('click', openDockMenu);
+    const openDockOptions = () => {
+      $('dock-options-menu').hidden = false; $('dock-options').setAttribute('aria-expanded', 'true');
+      feedback('dock', 'Klicka på Behåll i Dock.');
+    };
+    $('dock-options').addEventListener('mouseenter', openDockOptions);
+    $('dock-options').addEventListener('focus', openDockOptions);
+    $('dock-options').addEventListener('click', () => { openDockOptions(); $('keep-in-dock').focus(); });
+    $('dock-options').addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') { event.preventDefault(); openDockOptions(); $('keep-in-dock').focus(); }
+    });
+    $('keep-in-dock').addEventListener('click', () => {
+      kept = true; $('keep-in-dock').setAttribute('aria-checked', 'true'); $('dock-check').style.visibility = 'visible';
+      closeDockMenus(); $('dock-app').classList.add('is-kept');
+      feedback('dock', 'Klart! Visual Studio Code stannar nu i Dock när appen stängs.', 'success');
+    });
+    $('reset-dock').addEventListener('click', () => {
+      kept = false; closeDockMenus(); $('keep-in-dock').setAttribute('aria-checked', 'false');
+      $('dock-check').style.visibility = 'hidden'; $('dock-app').classList.remove('is-kept');
+      feedback('dock', 'Högerklicka på Visual Studio Code i Dock.');
+    });
+    $('dock-check').style.visibility = kept ? 'visible' : 'hidden';
+  }
 })();

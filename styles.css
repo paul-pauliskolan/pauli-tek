@@ -17,3 +17,8 @@ main { width:min(100%,1080px); padding:34px 48px 80px; } section { padding:34px 
 .other-chapters-home{grid-column:1/-1;padding:18px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
 .other-chapters-home>summary{cursor:pointer;font-size:20px;font-weight:750}
 .other-chapters-nav summary:focus-visible,.other-chapters-home>summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.contact-hero{padding-bottom:20px}
+.contact-form-section{padding-top:24px}
+.google-form-frame{width:100%;max-width:760px;overflow:hidden;border:1px solid var(--line);border-radius:10px;background:var(--panel);box-shadow:var(--shadow)}
+.google-form-frame iframe{display:block;width:100%;min-height:1025px;border:0;background:#fff}
+@media(max-width:650px){.google-form-frame{border-radius:6px}.google-form-frame iframe{min-height:1120px}}
