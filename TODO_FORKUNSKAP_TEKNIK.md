@@ -100,9 +100,9 @@
 - [x] Repetera area, omkrets, volym, Pythagoras sats och skala.
 - [x] Lägg in tekniknära tillämpningar, exempelvis ritningar, mätdata och hastighetsdiagram.
 
-### Kapitel 5 – Fysik: förkunskaper från grundskolan
+### Kapitel 5 – Fysik: förkunskaper
 
-- [ ] Bygg innehållet som repetition av de fysikkunskaper från grundskolan som behövs för att följa teknikprogrammets kurser.
+- [ ] Bygg innehållet som repetition av de fysikkunskaper som behövs för att följa teknikprogrammets kurser.
 - [ ] Repetera storheter, SI-enheter, prefix, enhetsomvandling, mätning, osäkerhet och rimlighetsbedömning.
 - [ ] Repetera rörelse: sträcka, tid, hastighet, acceleration samt tolkning av rörelsediagram.
 - [ ] Repetera krafter: kraftbegreppet, tyngdkraft, friktion, kraftresultant och enkla kraftdiagram.
@@ -110,11 +110,11 @@
 - [ ] Repetera elektricitet: ström, spänning, resistans, enkla kretsar, serie- och parallellkoppling, elektrisk effekt och elsäkerhet.
 - [ ] Träna att använda och tolka enkla formler, tabeller, grafer, modeller och laborationsinstruktioner.
 - [ ] Knyt varje område till teknikexempel, exempelvis fordon, konstruktioner, energi, sensorer och elektronik.
-- [ ] Markera tydligt vad som är repetition från grundskolan och vad som är en försmak av kommande fysik- och teknikstudier.
+- [ ] Markera tydligt vad som är repetition och vad som är en försmak av kommande fysik- och teknikstudier.
 
-### Kapitel 6 – Kemi: förkunskaper från grundskolan
+### Kapitel 6 – Kemi: förkunskaper
 
-- [ ] Bygg innehållet som repetition av de kemikunskaper från grundskolan som behövs för teknikprogrammets kurser.
+- [ ] Bygg innehållet som repetition av de kemikunskaper som behövs för teknikprogrammets kurser.
 - [ ] Repetera materiens uppbyggnad: atomer, molekyler, joner, grundämnen, kemiska tecken och periodiska systemet.
 - [ ] Repetera kemiska bindningar på grundnivå och hur de påverkar ämnens egenskaper.
 - [ ] Träna på att läsa och använda kemiska formler, enkla reaktionsformler och ordet *balanserad*.
