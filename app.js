@@ -150,7 +150,7 @@ function renderNavigation() {
   const digital = chapters.find(c => c.id === 'digitalt');
   const primary = [digital, ...orderedChapters().filter(c => chapterOrder[c.id] < 3 && c.id !== 'digitalt')];
   const others = orderedChapters().filter(c => chapterOrder[c.id] >= 3 && c.id !== 'digitalt');
-  el('#chapter-nav').innerHTML = `<details class="other-chapters-nav" open><summary>STEM</summary><div>${others.map(chapterLink).join('')}</div></details>` + primary.map(chapterLink).join('') + `<span class="nav-label nav-label-support">Kontakt</span><a href="${contactPath}" ${document.body.dataset.subpage === 'kontakt' ? 'aria-current="page"' : ''}>Ändringsförslag</a><a style="padding-left:24px" href="${changesPath}" ${document.body.dataset.subpage === 'changes' ? 'aria-current="page"' : ''}>↳ Genomförda ändringar</a>`;
+  el('#chapter-nav').innerHTML = `${subpageLink('sprakutveckling-stem.html','Språkutveckling i STEM','sprak-stem')}<details class="other-chapters-nav" open><summary>STEM</summary><div>${others.map(chapterLink).join('')}</div></details>` + primary.map(chapterLink).join('') + `<span class="nav-label nav-label-support">Kontakt</span><a href="${contactPath}" ${document.body.dataset.subpage === 'kontakt' ? 'aria-current="page"' : ''}>Ändringsförslag</a><a style="padding-left:24px" href="${changesPath}" ${document.body.dataset.subpage === 'changes' ? 'aria-current="page"' : ''}>↳ Genomförda ändringar</a>`;
   document.querySelectorAll('a[href="chapter-02.html"]').forEach(link => { link.href = 'digital-grundkompetens.html'; });
 }
 
