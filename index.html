@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Digital kompetens och språkutveckling för gymnasiets matematik, naturvetenskap och teknik på Pauliskolan.">
+    <meta name="description" content="Översikt över Pauliskolans stöd för digital kompetens, språkutveckling, studieteknik och STEM-ämnen: guider, metodbank, övningar, quiz och lärarstöd.">
     <title>Digital kompetens och språkutveckling i STEM</title>
     <link rel="stylesheet" href="styles.css">
     <script src="app.js?v=20261124-studieteknik4" defer></script>
@@ -26,27 +26,72 @@
       </aside>
 
       <main id="content">
-        <section class="hero" id="start">
-          <p class="eyebrow">Pauliskolan i Malmö · STEM</p>
-          <h1>Hitta rätt och repetera det du behöver</h1>
-          <p class="lead">Här får du stöd med digitala arbetssätt, studieteknik och ämneskunskaper inför och under gymnasiet. Välj ett område nedan eller använd menyn.</p>
-        </section>
-        <section class="site-guide" aria-labelledby="guide-heading">
-          <h2 id="guide-heading">Så är webbplatsen uppbyggd</h2>
-          <p>Varje kapitel är uppdelat på egna sidor så att du kan fokusera på en sak i taget.</p>
-          <ol class="site-steps">
-            <li><strong>Översikt</strong><span>Se vad kapitlet innehåller och välj hur du vill börja.</span></li>
-            <li><strong>Läs och öva</strong><span>Läs genomgångarna och gör uppgifterna. Här finns också exempel, fördjupning och källor.</span></li>
-            <li><strong>Quiz</strong><span>Testa utan stöd, läs återkopplingen och repetera det du missade. Gör ett nytt försök efter några dagar.</span></li>
-          </ol>
-          <p><strong>Presentationer</strong> finns på kapitlets översikt. Under <strong>Digital grundkompetens</strong> hittar du dessutom guider och snabbkommandon för dina kurser.</p>
-          <p>Du behöver inte läsa allt i ordning. Börja gärna med ett quiz och välj sedan de avsnitt du behöver träna på. Ämnena kan användas var för sig, så viktiga arbetssätt kan återkomma.</p>
-        </section>
-        <section aria-labelledby="stem-language-heading"><p class="eyebrow">Undersök · förklara · kommunicera</p><h2 id="stem-language-heading">Språkutveckling i STEM</h2><p>Hur blir en beräkning en övertygande förklaring? Pröva ett energiuppdrag med begreppsstöd, interaktiv modell och språkverkstad. För lärare finns ett upplägg för kollegial uppföljning med utgångspunkt i GVF:s språkstrategi.</p><a class="button primary" href="chapters/sprakutveckling-stem.html">Öppna Språkutveckling i STEM</a></section>
-        <section id="kapitel" aria-label="Välj kapitel">
-          <div id="chapter-grid"></div>
+        <header class="hero" id="start">
+          <p class="eyebrow">Pauliskolan i Malmö · för elever och lärare</p>
+          <h1>Digital kompetens och språkutveckling i STEM</h1>
+          <p class="lead">En samlad plats för att arbeta digitalt, förstå ämnestexter och förklara ditt tänkande i matematik, naturvetenskap och teknik. Här finns praktiska guider, språkutvecklande metoder, ämnesrepetition och stöd för hur du lär dig.</p>
+          <p>STEM står för naturvetenskap, teknik, ingenjörsvetenskap och matematik. Materialet kan användas i undervisningen på gymnasiet, för egen repetition och i kollegialt arbete.</p>
+          <div class="hero-actions"><a class="button primary" href="#omraden">Utforska innehållet</a><a class="button" href="chapters/sprakutveckling-stem.html#metoder">Till metodbanken</a></div>
+        </header>
+
+        <section id="omraden" aria-labelledby="areas-heading">
+          <p class="eyebrow">Webbplatsens fyra huvudområden</p>
+          <h2 id="areas-heading">Det här hittar du här</h2>
+          <div class="chapter-grid">
+            <article class="chapter-card">
+              <h3>Digital kompetens</h3>
+              <p>Träna på filer och mappar, dokument, kalkylark, informationssökning, källkritik och digital säkerhet. Få hjälp med skolans digitala arbetssätt och verktyg.</p>
+              <p>Praktiska guider visar bland annat styrplattan, Finder, bokmärken i Chrome och snabbkommandon för olika kurser.</p>
+              <a class="button" href="chapters/digital-grundkompetens.html">Öppna digital grundkompetens</a>
+            </article>
+            <article class="chapter-card">
+              <h3>Språkutveckling i STEM</h3>
+              <p>Utveckla begrepp, läsförståelse och förmågan att förklara samband. En metodbank med elva arbetssätt ger stöd inför läsning av ämnestexter, instruktioner och dokumentation.</p>
+              <p>Här finns ämnesanpassade undervisningsförslag, länkar till gymnasiematerial, ett interaktivt energiuppdrag och lärarstöd för uppföljning.</p>
+              <a class="button" href="chapters/sprakutveckling-stem.html">Öppna språkutveckling i STEM</a>
+            </article>
+            <article class="chapter-card">
+              <h3>Studieteknik och lärande</h3>
+              <p>Planera studiepass, träna på att minnas utan att titta och fördela repetitionen över tid. Använd återkoppling för att förstå dina fel och välja nästa steg.</p>
+              <p>Fördjupningen The Science of Learning kopplar kunskap om lärande till arbetet med skolans ämnen.</p>
+              <a class="button" href="chapters/studieteknik.html">Öppna studieteknik</a>
+            </article>
+            <article class="chapter-card">
+              <h3>Ämneskunskaper och ämnesspråk</h3>
+              <p>Repetera matematik, fysik, kemi, naturkunskap och teknik. Träna samtidigt på att tolka uppgifter, använda ämnesord och skriva begripliga förklaringar.</p>
+              <p>Ämneskapitlen innehåller genomgångar, övningar, exempel och quiz. Svenska och ämnesspråk ger ytterligare stöd för läsning och skrivande.</p>
+              <a class="button" href="#amnen">Välj ämne</a>
+            </article>
+          </div>
         </section>
 
+        <section id="amnen" aria-labelledby="subjects-heading">
+          <p class="eyebrow">Repetera och utveckla din förståelse</p>
+          <h2 id="subjects-heading">Ämnen och innehåll</h2>
+          <div class="chapter-grid">
+            <article class="lesson-block"><h3>Matematik</h3><p>Tal, procent och enheter; algebra och formler; grafer och geometri. Träna beräkningar, representationer och rimlighetsbedömning.</p><ul><li><a href="chapters/matematik-tal-procent-enheter.html">Tal, procent och enheter</a></li><li><a href="chapters/matematik-algebra-formler.html">Algebra och formler</a></li><li><a href="chapters/matematik-grafer-geometri.html">Grafer och geometri</a></li></ul></article>
+            <article class="lesson-block"><h3>Naturvetenskap och teknik</h3><p>Repetera centrala begrepp och samband och använd dem för att resonera om naturen och tekniska lösningar.</p><ul><li><a href="chapters/fysik.html">Fysik</a></li><li><a href="chapters/kemi.html">Kemi</a></li><li><a href="chapters/naturkunskap.html">Naturkunskap</a></li><li><a href="chapters/teknik.html">Teknik</a></li></ul></article>
+            <article class="lesson-block"><h3>Svenska och ämnesspråk</h3><p>Förstå uppgiftsverb, läs faktatexter och diagram, bygg förklaringar och skilj på resultat och slutsats.</p><p><a href="chapters/svenska.html">Öppna svenska och ämnesspråk</a></p><p>Metodbankens undervisningsförslag omfattar också biologi, programmering, CAD, konstruktion och andra tekniska fördjupningar.</p><p><a href="chapters/sprakutveckling-stem.html#metoder">Utforska ämnesförslagen i metodbanken</a></p></article>
+          </div>
+        </section>
+
+        <section class="site-guide" aria-labelledby="use-heading">
+          <h2 id="use-heading">Använd materialet utifrån ditt behov</h2>
+          <div class="chapter-grid">
+            <article><h3>För dig som är elev</h3><p>Välj det du behöver just nu: en praktisk guide, ett ämne att repetera eller en strategi för att förstå en text. I ämneskapitlen kan du börja med ett quiz och sedan arbeta med det du behöver öva på.</p><p>Växla mellan <strong>Översikt</strong>, <strong>Läs och öva</strong> och <strong>Quiz</strong>. Presentationer finns via kapitlens översikter. Försök själv, kontrollera och återkom efter några dagar.</p></article>
+            <article><h3>För dig som är lärare</h3><p>Välj ett språkutvecklande arbetssätt och anpassa stödet till text, ämne och elevgrupp. Metodsidorna innehåller arbetsgång, språkmål, formuleringar att pröva och förslag till uppföljning.</p><p>Lärarstödet knyter an till Malmö stads språkstrategi. De externa resurserna är märkta med ämne och gymnasienivå.</p><p><a href="chapters/sprakutveckling-stem.html#larare">Lärarstöd och kollegial uppföljning</a></p></article>
+          </div>
+        </section>
+
+        <section aria-labelledby="tools-heading">
+          <h2 id="tools-heading">Fler verktyg och genvägar</h2>
+          <div class="chapter-grid">
+            <article class="chapter-card"><h3>Datorkunskap i praktiken</h3><p>En minikurs med presentation, övningar och quiz. Fortsätt med guider till styrplatta, bokmärken och filhantering.</p><a class="button" href="chapters/datorvana.html">Öppna minikursen</a></article>
+            <article class="chapter-card"><h3>Snabbkommandon för dina kurser</h3><p>Hitta genvägar för Mac och verktyg inom bland annat teknik, CAD och produktutveckling. Kursguiderna ligger under Digital grundkompetens i menyn.</p><a class="button" href="chapters/snabbkommandon.html">Visa snabbkommandon</a></article>
+            <article class="chapter-card"><h3>Paubel – AI-stöd</h3><p>För Pauliskolans elever finns en ingång till Paubel i Gemini, med förslag på frågor om begrepp, kod, felsökning och studier. Kontrollera svaren och följ lärarens instruktioner.</p><a class="button" href="ai-stod.html">Läs om AI-stödet</a></article>
+          </div>
+          <p>Saknar du något eller har du hittat ett fel? <a href="chapters/kontakt.html">Lämna ett ändringsförslag</a> eller se <a href="chapters/genomforda-andringar.html">genomförda ändringar</a>.</p>
+        </section>
       </main>
     </div>
   </body>
