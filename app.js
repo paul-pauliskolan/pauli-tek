@@ -136,6 +136,11 @@ function renderNavigation() {
   const digitalSubpages = ['datorvana', 'trackpad', 'chrome', 'macos', 'dock', 'finder-path', 'shortcuts', 'shortcuts-teknik', 'shortcuts-fusion', 'shortcuts-design', 'shortcuts-information', 'shortcuts-teknikvetenskap', 'shortcuts-samhallsbyggande', 'it-programmet'];
   const inDigital = document.body.dataset.chapter === 'digitalt' || digitalSubpages.includes(document.body.dataset.subpage);
   const chapterLink = c => {
+    if (c.id === 'studieteknik') {
+      const inStudy = document.body.dataset.chapter === 'studieteknik' || document.body.dataset.subpage === 'science-of-learning';
+      const contents = `<a href="${chapterPath(c)}" ${document.body.dataset.chapter === 'studieteknik' ? 'aria-current="page"' : ''}>Översikt och övningar</a>${subpageLink('science-of-learning.html','The Science of Learning','science-of-learning')}`;
+      return `<details class="other-chapters-nav study-skills-nav" ${inStudy ? 'open' : ''}><summary>Studieteknik</summary><div>${contents}</div></details>`;
+    }
     if (c.id !== 'digitalt') return chapterContents(c);
     const contents = chapterContents(c).replace(`<a href="${chapterPath(c)}">${c.title.replace(' för teknikelever','')}</a>`, `<a href="${chapterPath(c)}" ${document.body.dataset.chapter === 'digitalt' ? 'aria-current="page"' : ''}>Översikt och övningar</a>`);
     return `<details class="other-chapters-nav digital-competence-nav" ${inDigital ? 'open' : ''}><summary>Digital grundkompetens</summary><div>${contents}</div></details>`;
