@@ -52,3 +52,7 @@ body[data-subpage="datorvana"] .trackpad-icon { display:none; }
 .finder-guide-figure { margin:22px 0 0; }
 .finder-guide-figure img { display:block; max-width:100%; height:auto; border:1px solid var(--line); border-radius:8px; }
 .finder-guide-figure figcaption { margin-top:8px; color:var(--muted); font-size:14px; }
+
+/* The full site title remains readable in desktop and mobile navigation. */
+.brand{font-size:20px;line-height:1.25;overflow-wrap:break-word}
+@media(max-width:800px){.mobilebar{height:84px;gap:12px}.mobilebar strong{font-size:14px;line-height:1.3;max-width:calc(100% - 70px)}.mobilebar .menu-button{flex-shrink:0}.sidebar{top:84px;height:calc(100vh - 84px)}}
