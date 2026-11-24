@@ -27,3 +27,7 @@
 .book-category{border:1px solid var(--line);border-radius:10px;background:#fff;padding:18px}.book-category>summary{cursor:pointer;display:list-item}.book-category>summary h2{display:inline;font-size:1.3rem;margin:0}.book-category-count{font-size:.875rem;color:var(--muted);margin-left:12px;white-space:nowrap}.book-category[open]>summary{margin-bottom:18px}body[data-subpage="stem-bokguide"] [data-book-category],body[data-subpage="stem-bokguide"] .book-entry{scroll-margin-top:var(--book-browser-height,220px)}.book-browser select:focus-visible,.book-browser input:focus-visible,.book-category>summary:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 @media(max-width:800px){.book-browser{top:84px;padding:10px}.book-browser-tools{gap:8px}.book-jump-label{flex-basis:100%}body[data-subpage="stem-bokguide"] [data-book-category],body[data-subpage="stem-bokguide"] .book-entry{scroll-margin-top:calc(var(--book-browser-height,260px) + 84px)}}
 @media print{.book-browser{display:none}.book-category{border:0;padding:0}.book-category:not([open]){display:block}}
+
+/* Show every book category without horizontal scrolling. */
+.book-category-links{flex-wrap:wrap;overflow-x:visible;padding-bottom:0}
+.book-category-links a{white-space:normal;flex-shrink:1;overflow-wrap:anywhere}
